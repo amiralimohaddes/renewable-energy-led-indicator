@@ -1,4 +1,3 @@
-Here is the updated README file with instructions for using the SystemD service to automate the program:
 
 ---
 
