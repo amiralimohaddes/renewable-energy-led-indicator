@@ -25,7 +25,7 @@ project/
 ├── energy_signal.py       # Main script for the project
 ├── energy_signal.service  # SystemD service file
 ├── README.md              # Documentation file
-└── requirements.txt       # Dependencies (optional)
+└── requirements.txt       # Dependencies
 ```
 
 ---
