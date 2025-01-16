@@ -1,6 +1,4 @@
 
----
-
 # Renewable Energy Signal Indicator - README
 
 This project uses a Raspberry Pi to indicate the share of renewable energy in the grid using three LEDs (Red, Yellow, Green). The program fetches real-time energy signals from an external API and lights up the appropriate LED to reflect the renewable energy status.
