@@ -21,7 +21,7 @@ The project is useful for people who want to optimize their energy consumption b
 ```plaintext
 project/
 │
-├── main.py                # Main script for the project
+├── energy_signal.py       # Main script for the project
 ├── README.md              # Documentation file
 └── requirements.txt       # Dependencies (optional)
 ```
@@ -93,7 +93,7 @@ pip install requests
 
 2. **Run the Script**  
    ```bash
-   python3 main.py
+   python3 energy_signal.py
    ```
 
 3. **Stop the Script**  
