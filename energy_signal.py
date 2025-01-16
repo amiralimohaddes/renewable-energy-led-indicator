@@ -94,13 +94,16 @@ def determine_status_based_on_json(data):
             closest_timestamp = timestamps[closest_idx]
             signal = signals[closest_idx]
 
-            # Calculate how long ago the signal was
+            # Calculate the time difference
             time_difference = current_time - closest_timestamp
-            time_diff_minutes = time_difference // 60
-            time_diff_seconds = time_difference % 60
 
-            # Print the time difference
-            print(f"Signal is {time_diff_minutes} minutes and {time_diff_seconds} seconds ago.")
+            if time_difference >= 0:
+                # Signal is from the past
+                print(f"Signal is {time_difference // 60} minutes and {time_difference % 60} seconds ago.")
+            else:
+                # Signal is in the future
+                time_difference = abs(time_difference)
+                print(f"Signal is {time_difference // 60} minutes and {time_difference % 60} seconds in the future.")
 
             # Map signal to status
             if signal == -1:
@@ -120,7 +123,6 @@ def determine_status_based_on_json(data):
     except Exception as e:
         print(f"Error parsing JSON data: {e}")
         return "error"
-
 
 
 def main():
