@@ -82,10 +82,27 @@ def fetch_energy_json():
 
     
 def determine_status_based_on_json(data):
-    """Determine the renewable energy status based on the signal."""
+    """Determine the renewable energy status based on the signal closest to the current time."""
     try:
-        if "signal" in data and data["signal"]:
-            signal = data["signal"][-1]  # Get the latest signal value
+        if "unix_seconds" in data and "signal" in data:
+            current_time = int(time.time())  # Current UNIX timestamp
+            timestamps = data["unix_seconds"]
+            signals = data["signal"]
+
+            # Find the closest timestamp
+            closest_idx = min(range(len(timestamps)), key=lambda i: abs(timestamps[i] - current_time))
+            closest_timestamp = timestamps[closest_idx]
+            signal = signals[closest_idx]
+
+            # Calculate how long ago the signal was
+            time_difference = current_time - closest_timestamp
+            time_diff_minutes = time_difference // 60
+            time_diff_seconds = time_difference % 60
+
+            # Print the time difference
+            print(f"Signal is {time_diff_minutes} minutes and {time_diff_seconds} seconds ago.")
+
+            # Map signal to status
             if signal == -1:
                 return "red"  # Grid congestion
             elif signal == 0:
@@ -98,7 +115,7 @@ def determine_status_based_on_json(data):
                 print("Unknown signal value.")
                 return "error"
         else:
-            print("Signal data not found.")
+            print("Signal or timestamp data not found.")
             return "error"
     except Exception as e:
         print(f"Error parsing JSON data: {e}")
@@ -127,7 +144,7 @@ def main():
                 all_leds_off()
 
             
-            time.sleep(1)
+            time.sleep(60)
     except KeyboardInterrupt:
         print("\nExiting program")
     finally:
