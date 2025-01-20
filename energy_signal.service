@@ -5,8 +5,8 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python3 /home/pi/energy_signal.py
 Restart=always
-User=pi
-Group=pi
+User=raspi
+Group=raspi
 
 [Install]
 WantedBy=multi-user.target
